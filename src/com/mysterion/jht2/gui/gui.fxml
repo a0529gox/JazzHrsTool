@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.mysterion.jht2.gui.Controller">
+  <children>
+    <TabPane prefHeight="407.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <tabs>
+        <Tab text="Work Items">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <HBox prefHeight="19.0" prefWidth="600.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <children>
+                    <Label id="msgLb" fx:id="lbMsg" prefHeight="19.0" prefWidth="600.0" text="" />
+                  </children>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" minHeight="0.0" prefHeight="19.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <children>
+                    <Button fx:id="btnRl" mnemonicParsing="false" prefHeight="27.0" text="Reload" />
+                    <Button fx:id="btnRd" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Random" />
+                    <Button id="saveBtn" fx:id="btnSave" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Save" />
+                  </children>
+                </HBox>
+                <TableView id="workItemTV" fx:id="tvWorkItems" prefHeight="330.0" prefWidth="600.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <columns>
+                    <TableColumn prefWidth="50.0" text="" fx:id="tcCb" />
+                    <TableColumn prefWidth="70.0" text="ID" fx:id="tcID" />
+                    <TableColumn prefWidth="260.0" text="Summary" fx:id="tcSummary" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Estimate" fx:id="tcEstimate" />
+                    <TableColumn prefWidth="60.0" text="Real" fx:id="tcReal" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="Hrs" fx:id="tcHrs" />
+                    <TableColumn prefWidth="50.0" text="Close" fx:id="tcClose" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Settings">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
