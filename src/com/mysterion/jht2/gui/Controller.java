@@ -53,6 +53,8 @@ public class Controller implements Initializable {
 	@FXML
 	TableColumn<WorkItemBean, String> tcReal;
 	@FXML
+	TableColumn<WorkItemBean, String> tcIteration;
+	@FXML
 	TableColumn<WorkItemBean, TextField> tcHrs;
 	@FXML
 	TableColumn<WorkItemBean, CheckBox> tcClose;
@@ -72,6 +74,7 @@ public class Controller implements Initializable {
 		tcSummary.setCellValueFactory(new PropertyValueFactory<WorkItemBean, String>("summary"));
 		tcEstimate.setCellValueFactory(new PropertyValueFactory<WorkItemBean, String>("estimateHrs"));
 		tcReal.setCellValueFactory(new PropertyValueFactory<WorkItemBean, String>("realHrs"));
+		tcIteration.setCellValueFactory(new PropertyValueFactory<WorkItemBean, String>("iteration"));
 		tcHrs.setCellValueFactory(new PropertyValueFactory<WorkItemBean, TextField>("hrs"));
 		tcClose.setCellValueFactory(new PropertyValueFactory<WorkItemBean, CheckBox>("close"));
 		
@@ -180,7 +183,7 @@ public class Controller implements Initializable {
 			}
 			
 			Double hrs = bean.getHrsValue();
-			if (hrs <= 0D) {
+			if (hrs < 0D) {
 				isHrsValid = false;
 				break;
 			}

@@ -31,7 +31,7 @@ public class Main extends Application {
 
 			Scene scene = new Scene(fxmlRoot);
 
-			primaryStage.setTitle("JazzHrsTool v2.0");
+			primaryStage.setTitle("JazzHrsTool v2.1");
 
 			primaryStage.setScene(scene);
 			

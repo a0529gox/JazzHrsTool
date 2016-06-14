@@ -14,6 +14,7 @@ public class WorkItemBean implements Serializable {
     private String summary = null;
     private Double estimateHrs = null;
     private Double realHrs = null;
+    private String iteration = null;
     private TextField hrs = null;
     private CheckBox close = null;
 
@@ -64,6 +65,14 @@ public class WorkItemBean implements Serializable {
 
 	public void setRealHrs(Double realHrs) {
 		this.realHrs = realHrs;
+	}
+
+	public String getIteration() {
+		return iteration;
+	}
+
+	public void setIteration(String iteration) {
+		this.iteration = iteration;
 	}
 
 	public TextField getHrs() {

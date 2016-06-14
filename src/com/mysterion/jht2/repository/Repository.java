@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import com.ibm.team.process.client.IProcessClientService;
+import com.ibm.team.process.common.IIteration;
 import com.ibm.team.process.common.IProjectArea;
 import com.ibm.team.repository.client.IContributorManager;
 import com.ibm.team.repository.client.ILoginHandler2;
@@ -13,6 +14,8 @@ import com.ibm.team.repository.client.ILoginInfo2;
 import com.ibm.team.repository.client.ITeamRepository;
 import com.ibm.team.repository.client.TeamPlatform;
 import com.ibm.team.repository.client.login.UsernameAndPasswordLoginInfo;
+import com.ibm.team.repository.common.IAuditable;
+import com.ibm.team.repository.common.IAuditableHandle;
 import com.ibm.team.repository.common.IContributor;
 import com.ibm.team.repository.common.TeamRepositoryException;
 import com.ibm.team.workitem.client.IAuditableClient;
@@ -32,6 +35,7 @@ import com.ibm.team.workitem.common.model.AttributeOperation;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.ibm.team.workitem.common.model.Identifier;
+import com.ibm.team.workitem.common.model.ItemProfile;
 import com.ibm.team.workitem.common.query.IQueryResult;
 import com.ibm.team.workitem.common.query.IResolvedResult;
 import com.ibm.team.workitem.common.workflow.IWorkflowAction;
@@ -40,6 +44,8 @@ import com.mysterion.jht2.log.AnnoyLogger;
 import com.mysterion.jht2.util.URIUtil;
 
 public class Repository {
+	
+	
 	private static Repository self = null;
 	private final String jazzUrl;
 	private final String partialName;
@@ -58,7 +64,7 @@ public class Repository {
 	private IProjectArea projectArea = null;
 	private IQueryClient queryClient = null;
 	
-	
+	private IAttribute attrTimeSpent = null;
 	
 	private Repository(String jazzUrl, String partialName, String partialOwnerName, String username, String password) {
 		this.jazzUrl = jazzUrl;
@@ -211,6 +217,25 @@ public class Repository {
 		auditableClient = (IAuditableClient) itRepo.getClientLibrary(IAuditableClient.class);
 		projectArea = (IProjectArea) processClient.findProcessArea(URIUtil.get(partialName), null, null);
 		queryClient = (IQueryClient) itRepo.getClientLibrary(IQueryClient.class);
+	}
+	
+	public Object getTimeSpent(IWorkItem workItem) {
+		if (attrTimeSpent == null) {
+			attrTimeSpent = self.getAttribute(WorkItemAttributes.getAttributeId(WorkItemAttributes.TIME_SPENT));
+		}
+		return workItem.getValue(attrTimeSpent);
+	}
+	
+	public IIteration getIteration(IWorkItem workItem) throws Exception {
+		return (IIteration) resolveAuditable(workItem.getTarget(), ItemProfile.ITERATION_DEFAULT);
+	}
+	
+	private <T extends IAuditable> T resolveAuditable(IAuditableHandle handle, ItemProfile<T> profile) throws Exception {
+		try {
+			return auditableClient.resolveAuditable(handle, profile, null);
+		} catch (TeamRepositoryException e) {
+			throw e;
+		}
 	}
 	
 	public boolean isLogin() {

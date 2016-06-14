@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.mysterion.jht2.gui.Controller">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mysterion.jht2.gui.Controller">
   <children>
     <TabPane prefHeight="407.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <tabs>
@@ -28,14 +28,18 @@
                 </HBox>
                 <TableView id="workItemTV" fx:id="tvWorkItems" prefHeight="330.0" prefWidth="600.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <columns>
-                    <TableColumn prefWidth="50.0" text="" fx:id="tcCb" />
-                    <TableColumn prefWidth="70.0" text="ID" fx:id="tcID" />
-                    <TableColumn prefWidth="260.0" text="Summary" fx:id="tcSummary" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Estimate" fx:id="tcEstimate" />
-                    <TableColumn prefWidth="60.0" text="Real" fx:id="tcReal" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="Hrs" fx:id="tcHrs" />
-                    <TableColumn prefWidth="50.0" text="Close" fx:id="tcClose" />
+                    <TableColumn fx:id="tcCb" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="" />
+                    <TableColumn fx:id="tcID" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="ID" />
+                    <TableColumn fx:id="tcSummary" prefWidth="260.0" text="Summary" />
+                    <TableColumn fx:id="tcEstimate" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Estimate" />
+                    <TableColumn fx:id="tcReal" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Real" />
+                              <TableColumn fx:id="tcIteration" maxWidth="200.0" minWidth="150.0" prefWidth="60.0" text="Iteration" />
+                    <TableColumn fx:id="tcHrs" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Hrs" />
+                    <TableColumn fx:id="tcClose" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Close" />
                   </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                 </TableView>
               </children>
             </AnchorPane>

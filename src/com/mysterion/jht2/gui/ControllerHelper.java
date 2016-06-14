@@ -2,10 +2,9 @@ package com.mysterion.jht2.gui;
 
 import java.util.List;
 
+import com.ibm.team.process.common.IIteration;
 import com.ibm.team.repository.client.TeamPlatform;
 import com.ibm.team.repository.common.TeamRepositoryException;
-import com.ibm.team.workitem.common.internal.model.WorkItemAttributes;
-import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.mysterion.jht2.factory.RepositoryFactory;
 import com.mysterion.jht2.log.AnnoyLogger;
@@ -52,18 +51,20 @@ public class ControllerHelper {
 					updateMessage("取得Work Item中…");
 					List<IWorkItem> list = repo.getWorkingWorkItems();
 					
-					IAttribute attrTimeSpent = repo.getAttribute(WorkItemAttributes.getAttributeId(WorkItemAttributes.TIME_SPENT));
+					
 					
 					for (IWorkItem result : list) {
 						WorkItemBean bean = new WorkItemBean();
-
+						
 						bean.setId(result.getId());
 						bean.setSummary(result.getHTMLSummary().getPlainText());
-						Object objTimeSpent = result.getValue(attrTimeSpent);
+						Object objTimeSpent = repo.getTimeSpent(result);
 						Double dTimeSpent = objTimeSpent == null ? 0 : Double.valueOf(objTimeSpent.toString()) / ( 60 * 60 * 1000);
 						bean.setRealHrs(dTimeSpent <= 0d ? 0d : dTimeSpent);
 						Double dEstimateHrs = Double.valueOf(result.getDuration()) / ( 60 * 60 * 1000);
 						bean.setEstimateHrs(dEstimateHrs <= 0d ? 0d : dEstimateHrs);
+						IIteration iteration = repo.getIteration(result);
+						bean.setIteration(iteration.getName());
 						
 						ctrl.tvWorkItems.getItems().add(bean);
 					}
